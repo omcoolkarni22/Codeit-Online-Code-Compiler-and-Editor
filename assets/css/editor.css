@@ -1,0 +1,210 @@
+#editor {
+    position: absolute;
+    top: 10%;
+    bottom: 12px;
+    right: 51%;
+    left: 11px;
+    border: 2px solid grey;
+    border-radius: 6px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.ace_mobile-menu {
+    display: none;
+}
+
+.ace_editor,
+.ace_editor * {
+    font-family: 'Inconsolata', 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', 'source-code-pro', monospace;
+}
+
+#compilier {
+    position: absolute;
+    left: 53%;
+    width: 45%;
+}
+
+#p_language,
+#select-font-size,
+#dropdownShareOptions {
+    margin: 16px 0px;
+    padding: 5px;
+    width: 100px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    letter-spacing: 0.062rem;
+    cursor: pointer;
+}
+
+#select-font-size {
+    width: 100px;
+    margin: 7px;
+}
+
+#custom_input {
+    display: block;
+    max-width: 400px;
+    margin: 1px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: lighter;
+    letter-spacing: 0.062rem;
+    box-sizing: border-box;
+}
+
+#compile-btn,
+#save-btn,
+#share-btn {
+    color: black;
+    margin: 10px 1px;
+    padding: 7px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    letter-spacing: 0.062rem;
+    font-size: medium;
+    width: 99px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#compile-btn:hover,
+#save-btn:hover,
+#share-btn:hover {
+    background-color: #ccc;
+}
+
+#compile-btn:disabled,
+#save-btn:disabled,
+#share-btn:disabled {
+    cursor: not-allowed;
+}
+
+.sharePop {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sharePop div {
+    float: left;
+    flex-wrap: wrap;
+}
+
+#shareURL {
+    outline: none;
+    background-color: transparent;
+    resize: none;
+    border-radius: 4px;
+    width: 295px;
+    font-size: medium;
+    color: white;
+    margin: 10px 0px;
+    padding: 5px;
+}
+
+#dropdownShareOptions {
+    width: 135px;
+    margin: 10px;
+}
+
+.material-icons-round {
+    margin: 5px 0;
+    padding: 5px;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.loader {
+    display: none;
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 1.5s alternate-reverse infinite;
+    animation: spin 2s alternate-reverse infinite;
+}
+
+#compile-message {
+    margin: 10px 0;
+    padding: 2px 0;
+    font-size: larger;
+    color: white;
+    letter-spacing: 0.062rem;
+}
+
+#saved-code {
+    display: none;
+    margin: 10px 0;
+    width: 100%;
+    max-height: 215px;
+    overflow: auto;
+    color: white;
+    box-sizing: border-box;
+}
+
+#saved-code a {
+    text-decoration: none;
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    border-radius: 2px;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    #editor {
+        right: 1.5%;
+        top: 9%;
+        left: 8px;
+        transition: all 1s;
+    }
+    #compilier {
+        position: absolute;
+        top: 99%;
+        left: 11px;
+        width: 95%;
+        transition: all 1s;
+    }
+    #compile-btn,
+    #save-btn,
+    #share-btn {
+        width: 25%;
+        transition: all 1s;
+    }
+    #dropdownShareOptions {
+        width: 140px;
+        margin: 10px 0px;
+    }
+}

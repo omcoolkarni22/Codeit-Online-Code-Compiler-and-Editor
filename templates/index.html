@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block login %}
+    <div class="container">
+        <h3 id='h3'> Login Here </h3>
+
+        <form action="{% url 'login' %}" method="POST" id="form-login">
+            {% csrf_token %}
+            <input type="email" id='email' name="email" class="input" placeholder="Email" title="Enter Your Email Address" required>
+            <input type="password" id='password' name="password" class="input" placeholder="Password" title="Enter Your Password" required>
+            <span class="forgot-password">
+                <a href="javascript:sendMail();" title="Forgot Password?" id="link-reset">Forgot Password?</a>
+            </span>
+
+            <button class="btn" type="submit" title="Submit the Form">Submit</button>
+            <button class="btn" type="reset" title="Reset the Form">Reset</button>
+        </form>
+
+        <form action="{% url 'registration' %}" method="POST" id="form-register">
+            {% csrf_token %}
+            <input type="text" id='r-name' name="firstName" class="input" placeholder="First Name" title="Enter Your First Name" required>
+{#            <input type="text" id='l-name' name="lastName" class="input" placeholder="Last-Name" title="Enter Your Last Name" required>#}
+            <input type="email" id='r-email' name="email" class="input" placeholder="Email" title="Enter Your Email Address" required>
+            <input type="password" id='r-password' name="password" class="input" placeholder="Password" title="Enter Your Password" required>
+            <input type="password" name="confirm_password" class='input password' id='confirm_password' placeholder="Confirm Password" title="Confirm Your Password" required>
+
+            <button class="btn" type="submit" title="Submit the Form">Submit</button>
+            <button class="btn" type="reset" title="Reset the Form">Reset</button>
+        </form>
+
+        <a href="{% url 'continue_as_a_guest' %}" id="continue-as-a-guest-a" title="With Limited Features...">Continue as a Guest</a>
+    </div>
+{% endblock login %}

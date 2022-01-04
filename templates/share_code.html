@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeIt - Editor, Compiler and Interpreter</title>
+    <link rel="shortcut icon" href="{% static 'img/fevicon.jpg' %}" type="image/x-icon">
+    <meta name="description" content="Write, Edit and Compile Programming Languages like C, C++ and Python. Share your code in the easiest way. Highlight Syntax in the Code Editor. The most reliable Compiler and Interpreter.">
+    <meta name="keywords" content="online python compiler,c online compiler,HTML,CSS,XML,JavaScript,Python,C,C++,Django,Compiler,Interpreter, jQuery">
+    <meta name="author" content="Omkar Kulkarni">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/editor.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="topnav">
+            <a href="#">
+                CodeIt
+            </a>
+            {% if user.is_authenticated %}
+                <a href="javascript:savedCode();"> Saved Code </a>
+                <a href="{% url 'logout' %}"> Logout </a>
+            {% else %}
+                <span id="register-navbar" onclick="showRegister();" style="display: none;">
+                    Register
+                </span>
+                <span id="login-navbar" onclick="showLogin();" style="display: inline;">
+                    Login
+                </span>
+            {% endif %}
+
+            <a href="https://drive.google.com/file/d/12AoXCJuMLV2zT4fxp2o3Q6AiKhtyCAmW/view?usp=sharing" target="_blank">
+                Help
+            </a>
+
+            <span id="report-bug" onclick="location.href='mailto:omkulkarni22@gmail.com';" title="Mail Bug to Developer">
+                Report Bug
+            </span>
+        </nav>
+    </header>
+
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        {% if user.is_authenticated %}
+            <a href="javascript:savedCode();">Saved Code</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="/" id="register-navbar">Register</a>
+            <a href="/" id="login-navbar">Login</a>
+        {% endif %}
+        <a href="https://drive.google.com/file/d/12AoXCJuMLV2zT4fxp2o3Q6AiKhtyCAmW/view?usp=sharing" target="_blank">Help</a>
+        <a href="mailto:omkulkarni22@gmail.com">Report Bug</a>
+    </div>
+    <button class="openbtn" onclick="openNav()">☰ Code It</button>
+
+</body>
+
+
+{#Editor Block #}
+
+<div id="editor">
+    </div>
+
+    <!-- Compilier  -->
+    <div id='compilier'>
+
+        <!-- Programming Languages Dropdown -->
+        <select name="language" id="p_language" title="Select Programming Language">
+            <option value="c" class="options">C</option>
+            <option value="cpp" class="options">C++</option>
+            <option value="python" class="options">Python</option>
+        </select>
+
+        <!-- FontSize for Editor -->
+        <select name="select-font-size" id="select-font-size" onchange="changeFontSize();" title="Select Font Size">
+            <option value="16px" class="options">16px</option>
+            <option value="18px" class="options" selected>18px</option>
+            <option value="20px" class="options">20px</option>
+            <option value="22px" class="options">22px</option>
+            <option value="24px" class="options">24px</option>
+            <option value="26px" class="options">26px</option>
+            <option value="28px" class="options">28px</option>
+            <option value="30px" class="options">30px</option>
+        </select>
+
+        <!-- TextArea-Custom Input -->
+        <textarea name="custom_input" id="custom_input" rows="6" cols="39" placeholder="Enter Custom Input Here (If any)"></textarea>
+
+        <!-- Buttons -->
+        <button id="compile-btn" onclick="compileCode()">Compile</button>
+        {% if user.is_authenticated %}
+            <button id="save-btn" onclick="saveCode()">Save</button>
+            <button id="share-btn" onclick="showShareOptions()">Share</button>
+        {% else %}
+            <button id="save-btn" onclick="userNotLogged();">Save</button>
+            <button id="share-btn" onclick="userNotLogged();">Share</button>
+        {% endif %}
+
+        <div class="loader"></div>
+        <div id="compile-message"></div>
+
+        <div id="saved-code">
+            <table id="myTable">
+                  <tr>
+                    <th>Date Time</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                  </tr>
+                </table>
+        </div>
+
+    </div>
+
+    <!-- Main Ace Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.min.js " type="text/javascript" charset="utf-8 "></script>
+
+    <!-- JS Worker  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/worker-javascript.min.js " integrity="sha512-hwPBZJdHUlQzk8FedQ6S0eqJw/26H3hQ1vjpdAVJLaZU/AJSkhU29Js3/J+INYpxEUbgD3gubC7jBBr+WDqS2w==" crossorigin="anonymous" referrerpolicy="no-referrer "></script>
+
+    <!-- Theme  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/theme-monokai.min.js " integrity="sha512-wZYGbdk0giM73l8BLDNfSEziApAmH8DvXey6zNLG3QUgDeDsMAPm3FIdjhLwrGOWO0vdVHkVxeUzOBR0Hc/xBA==" crossorigin="anonymous" referrerpolicy="no-referrer "></script>
+
+    <!-- C/C++ Mode  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/mode-c_cpp.min.js " integrity="sha512-dxOWVFGgO0QZsn3ZyE3DSMDO53d4dpI3dashemV1+SSdejPhTsC1PShhHjsAwOi1oyk9ErBx6efuOpOOJtbIFg==" crossorigin=" anonymous " referrerpolicy="no-referrer "></script>
+    <!-- C/C++ Autocomplete file  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/snippets/c_cpp.min.js" integrity="sha512-4GcMR+gd1yUV/u7qIgrwhmS1YdXTE7H2F8ByQipCm7TLZMDHEOGFd3Vz6BeGJIhyu6b7n9nv5LDpCr+M+Jfo2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- Python Mode -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/mode-python.min.js" integrity="sha512-5quc8iiv3k68XXN7adEav7dyI4bnTDz7WSa99HZmgJk8gZlabsTQibJso2fAZpSO598IZIasgfu/StF9oX+kqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Python Autocomplete file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/snippets/python.min.js" integrity="sha512-QlDxAY08FSUbmRi46v+pZBc/XhwbU6hS20UdcCeGdM9RIHXnGvPwqM08WvZr3vFXWiGrzTAqCKayx0nkWBk7hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Required for basic auto completion  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ext-language_tools.min.js" integrity="sha512-S7Whi8oQAQu/MK6AhBWufIJIyOvqORj+/1YDM9MaHeRalsZjzyYS7Usk4fsh+6J77PUhuk5v/BxaMDXRdWd1KA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- All own functions written here -->
+    <script src="{% static 'js/editor.js' %} "></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script>
+        function showLogin(){
+            location.assign('/');
+        }
+
+        window.onload = function() {
+            getShareCodeHere();
+        };
+    </script>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <div id="snackbar">{{ message }}</div>
+            <script>
+                function myFunction() {
+                  var x = document.getElementById("snackbar");
+                  x.className = "show";
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                }
+                myFunction()
+            </script>
+        {% endfor %}
+    {% endif %}
+
+</html>

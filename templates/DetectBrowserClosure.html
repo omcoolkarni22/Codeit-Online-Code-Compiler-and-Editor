@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Detect browser or tab close event using JavaScript - Clue Mediator
+    </title>
+    <style>
+        input {
+            width: 300px;
+            padding: 5px;
+            border: 1px solid #999;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Detect browser or tab close event - <a href="https://cluemediator.com/" target="_blank" rel="noopener noreferrer">Clue Mediator</a></h3>
+    <b>Show alert before close/reload the tab or browser</b>
+
+    <p>Nowadays, most browsers require interaction with a page / site, otherwise a warning box will not be shown.</p>
+
+    <form>
+        <input type="text" placeholder="Write something to do interaction" />
+    </form>
+
+    <script type="text/javascript">
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+    </script>
+</body>
+
+</html>

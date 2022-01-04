@@ -1,0 +1,224 @@
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+    background-color: #333334;
+    color: black;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    border: 1px #f2f2f2 solid;
+    border-radius: 10px;
+    letter-spacing: 0.062rem;
+    clear: both;
+    transition: all 1s;
+}
+
+.topnav span,
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+#login-navbar {
+    display: none;
+}
+
+/*Responsive Nav Bar CSS*/
+.sidepanel {
+    letter-spacing: 0.062rem;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    height: 250px;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidepanel a:hover {
+    color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: none;
+    background-color: #333;
+    border: 1px #f2f2f2 solid;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+.container {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #333333;
+    margin: 120px auto;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background-color: #f2f2f2;
+    letter-spacing: 0.062rem;
+}
+
+#h3 {
+    text-align: center;
+    font-weight: lighter;
+}
+
+.input {
+    color: black;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: medium;
+    box-shadow: #ccc 2px 4px 6px;
+    letter-spacing: 0.062rem;
+}
+
+.btn {
+    width: 25%;
+    padding: 12px 17px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: medium;
+    box-shadow: #ccc 2px 4px 6px;
+    letter-spacing: 0.062rem;
+    cursor: pointer;
+    clear: both;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.forgot-password {
+    text-align: center;
+    float: right;
+    margin: 4px;
+    position: sticky;
+}
+
+#link-reset {
+    text-decoration: none;
+    font-size: 14px;
+    color: #000000;
+}
+
+#link-reset:hover,
+#continue-as-a-guest-a:hover {
+    color: #333333;
+}
+
+#form-register {
+    display: none;
+}
+
+#continue-as-a-guest-a {
+    text-decoration: none;
+    color: #000000;
+}
+
+/*Message Toast*/
+#snackbar {
+  display: none;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  display: inline-block;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@media only screen and (max-width: 700px) {
+    .container {
+        width: 100%;
+        transition: all 1s;
+    }
+    .btn {
+        padding: 12px 0;
+        transition: all 1s;
+    }
+    .topnav span,
+    .topnav a {
+        padding: 8px 8px;
+        transition: all 1s;
+    }
+    .openbtn {
+        display: block;
+    }
+    header {
+        display: none;
+    }
+}
