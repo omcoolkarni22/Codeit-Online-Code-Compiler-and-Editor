@@ -19,6 +19,7 @@ And Yet More Feature To Be Added...
 **Tech Stack:**<br>
 _Frontend_: **HTML, CSS, jQuery, JavaScript**<br>
 _Backend_: **Python, Django, Flask(API)**<br>
+_Database_: **sqlite3**(On Local System), **Postgresql**(On the Server)<br>
 
 <!-- **Installation on Local System:**<br>
  -->
