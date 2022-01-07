@@ -7,3 +7,4 @@ if_req.txt
 .idea/*
 post.py
 compiler-api/*
+.gitignore

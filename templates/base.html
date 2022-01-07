@@ -90,4 +90,10 @@
     {% endfor %}
 {% endif %}
 
+<script>
+    {% if not user.is_authenticated %}
+        sessionStorage.clear();
+    {% endif %}
+</script>
+
 </html>
