@@ -11,6 +11,7 @@ urlpatterns = [
     path('save_code', SaveCode, name='save_code'),  # Save Code
     path('returnAllSavedCode', AllSavedCode, name='returnAllSavedCode'),  # return saved codes
     path('getCode', getCode, name='getCode'),  # get a particular code
+    path('deleteSavedCode', deleteSavedCode, name='deleteSavedCode'),  # delete saved code
     path('saveShareCode', saveShareCode, name='saveShareCode'),  # Save the code that user want to share
     path('getSingleShareCode', getSingleShareCode, name='getSingleShareCode'),  # get the single shared code
     path('continue_as_a_guest', continue_as_a_guest, name='continue_as_a_guest'),  # continue as a guest with limited features

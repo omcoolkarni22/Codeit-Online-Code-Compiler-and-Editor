@@ -174,6 +174,22 @@ def getCode(request):
         return JsonResponse(serializer.data, safe=False)
 
 
+# delete saved code
+@csrf_exempt
+def deleteSavedCode(request):
+    if request.is_ajax() and request.method == 'POST':
+        unique_url = request.POST['unique_url']
+        try:
+            UserCode.objects.get(slug=unique_url).delete()
+            return JsonResponse({
+                "success": True
+            })
+        except Exception as e:
+            return JsonResponse({
+                "success": False
+            })
+
+
 # Share & Save Code
 @csrf_exempt
 def saveShareCode(request):
