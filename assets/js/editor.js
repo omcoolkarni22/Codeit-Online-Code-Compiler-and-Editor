@@ -395,12 +395,3 @@ function getShareCodeHere() {
 function userNotLogged() {
     alert("Please Login to use this feature!");
 }
-
-// If user refresh or close tab
-// window.addEventListener('beforeunload', function(e) {
-//     let p_language = document.getElementById('p_language').value;
-//     let code = editor.getValue();
-//     sessionStorage.setItem(p_language, code);
-//     e.preventDefault();
-//     e.returnValue = '';
-// });

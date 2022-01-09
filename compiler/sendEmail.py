@@ -1,10 +1,11 @@
 from bs4 import BeautifulSoup
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
+import os
 
 
 def send(to, url):
-    with open('D:\\Python\\Codeit\\templates\\resetPassword.html') as file:
+    with open(os.getcwd() + '\\templates\\resetPassword.html') as file:
         txt = file.read()
         soup = BeautifulSoup(txt, 'html.parser')
 
@@ -19,7 +20,7 @@ def send(to, url):
         html_content=str(soup)
     )
     try:
-        sg = SendGridAPIClient('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')
+        sg = SendGridAPIClient(os.environ.get('SEND_GRID_API'))
         response = sg.send(message)
         return True if response.status_code == 202 else False
 
@@ -29,4 +30,3 @@ def send(to, url):
 
 if __name__ == '__main__':
     send('', 'google.com')
-
