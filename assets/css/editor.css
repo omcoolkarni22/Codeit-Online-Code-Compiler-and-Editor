@@ -135,7 +135,7 @@
     letter-spacing: 0.062rem;
 }
 
-#saved-code {
+.saved-code {
     display: none;
     margin: 10px 0;
     width: 100%;
@@ -145,7 +145,7 @@
     box-sizing: border-box;
 }
 
-#saved-code a {
+.saved-code a {
     text-decoration: none;
     color: white;
 }

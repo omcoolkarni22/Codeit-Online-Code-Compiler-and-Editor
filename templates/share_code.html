@@ -31,6 +31,7 @@
             </a>
             {% if user.is_authenticated %}
                 <a href="javascript:savedCode();"> Saved Code </a>
+                <a href="javascript:sharedCode();"> Shared Code </a>
                 <a href="{% url 'logout' %}"> Logout </a>
             {% else %}
                 <span id="register-navbar" onclick="showRegister();" style="display: none;">
@@ -55,6 +56,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         {% if user.is_authenticated %}
             <a href="javascript:savedCode();">Saved Code</a>
+            <a href="javascript:sharedCode();"> Shared Code </a>
             <a href="{% url 'logout' %}">Logout</a>
         {% else %}
             <a href="/" id="register-navbar">Register</a>
@@ -111,12 +113,26 @@
         <div class="loader"></div>
         <div id="compile-message"></div>
 
-        <div id="saved-code">
-            <table id="myTable">
+        <div id="saved-code" class="saved-code" >
+            <p>Saved Codes</p>
+            <table id="saveTable">
                   <tr>
                     <th>Date Time</th>
                     <th>Name</th>
                     <th>Code</th>
+                    <th>Delete</th>
+                  </tr>
+                </table>
+        </div>
+
+    <div id="shared-code" class="saved-code">
+        <p>Shared Codes</p>
+            <table id="shareTable">
+                  <tr>
+                    <th>Code</th>
+                    <th>Language</th>
+                    <th>Permission</th>
+                    <th>Delete</th>
                   </tr>
                 </table>
         </div>

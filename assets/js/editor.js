@@ -275,7 +275,7 @@ function deleteSavedCode(slug){
         },
         success: function (json) {
             if (json.success) {
-                alert('Code Deletion Success!!!');
+                alert('Code Deletion Successful!!!');
                 window.location.assign('/');
             }
             else alert('Something went wrong or this file might be already deleted.');
@@ -293,7 +293,7 @@ function savedCode(){
     let loader = $('.loader');
     loader.show();
     // Send request if we don't have saved code data
-    if ($('#myTable tbody tr').length-1 === 0){
+    if ($('#saveTable tbody tr').length-1 === 0){
         $.ajax({
         type: 'POST',
         url: 'returnAllSavedCode',
@@ -303,11 +303,11 @@ function savedCode(){
                 alert('No Saved Codes!');
             }
             else {
-                if (json.length !== $('#myTable tbody tr').length-1){
+                if (json.length !== $('#saveTable tbody tr').length-1){
                     json.forEach(code => {
                     let slug = String(code.slug);
                     $('#saved-code').show();
-                    $('#myTable tr:last').after(`<tr><td> ${String(code.datetime).replace('T', '  ').replace('+05:30', ' ').substr(0, 20)} </td> <td> <a  href=javascript:getCode('${slug}'); >  ${code.name} </a></td> <td> ${String(code.code).trunc(30)} </td> <td> <a href="javascript:deleteSavedCode('${slug}')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
+                    $('#saveTable tr:last').after(`<tr><td> ${String(code.datetime).replace('T', '  ').replace('+05:30', ' ').substr(0, 20)} </td> <td> <a  href=javascript:getCode('${slug}'); >  ${code.name} </a></td> <td> ${String(code.code).trunc(30)} </td> <td> <a href="javascript:deleteSavedCode('${slug}')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
                     });
                 }
             }
@@ -319,6 +319,40 @@ function savedCode(){
     }
     loader.hide();
 }
+
+
+// Show all shared codes
+function sharedCode(){
+    let loader = $('.loader');
+    loader.show();
+    // Send request if we don't have saved code data
+    if ($('#shareTable tbody tr').length-1 === 0){
+        $.ajax({
+        type: 'POST',
+        url: 'returnAllSharedCode',
+        data: {},
+        success: function (json){
+            if (json.length === 0) {
+                alert('No Saved Codes!');
+            }
+            else {
+                if (json.length !== $('#shareTable tbody tr').length-1){
+                    json.forEach(code => {
+                    let slug = String(code.uniqueShareUrl);
+                    $('#shared-code').show();
+                    $('#shareTable tr:last').after(`<tr><td> ${String(code.code).trunc(50)} </td> <td> ${code.language} </td> <td> ${String(code.permission)} </td> <td> <a href="javascript:deleteSavedCode('${slug}')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
+                    });
+                }
+            }
+        },
+        error : function(xhr,errmsg,err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+    }
+    loader.hide();
+}
+
 
 // Once html share page is loaded call this function and get code
 function getShareCodeHere() {

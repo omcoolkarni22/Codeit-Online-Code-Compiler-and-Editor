@@ -190,6 +190,16 @@ def deleteSavedCode(request):
             })
 
 
+# Return all shared codes
+@csrf_exempt
+def AllSharedCode(request):
+    if request.is_ajax() and request.method == 'POST':
+        user = request.user
+        all_codes = ShareCode.objects.filter(user=user).order_by('-id')
+        serializer = UserShareCodeSerializers(all_codes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
 # Share & Save Code
 @csrf_exempt
 def saveShareCode(request):
