@@ -265,11 +265,11 @@ String.prototype.trunc =
 
 
 // Delete saved code
-function deleteSavedCode(slug){
+function deleteSavedSharedCode(slug, url){
     if (confirm('Are you sure, you want to delete the code ?')) {
         $.ajax({
         type: 'POST',
-        url: 'deleteSavedCode',
+        url: url,
         data: {
             unique_url: slug
         },
@@ -307,7 +307,7 @@ function savedCode(){
                     json.forEach(code => {
                     let slug = String(code.slug);
                     $('#saved-code').show();
-                    $('#saveTable tr:last').after(`<tr><td> ${String(code.datetime).replace('T', '  ').replace('+05:30', ' ').substr(0, 20)} </td> <td> <a  href=javascript:getCode('${slug}'); >  ${code.name} </a></td> <td> ${String(code.code).trunc(30)} </td> <td> <a href="javascript:deleteSavedCode('${slug}')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
+                    $('#saveTable tr:last').after(`<tr><td> ${String(code.datetime).replace('T', '  ').replace('+05:30', ' ').substr(0, 20)} </td> <td> <a  href=javascript:getCode('${slug}'); >  ${code.name} </a></td> <td> ${String(code.code).trunc(30)} </td> <td> <a href="javascript:deleteSavedSharedCode('${slug}', 'deleteSavedCode')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
                     });
                 }
             }
@@ -333,14 +333,14 @@ function sharedCode(){
         data: {},
         success: function (json){
             if (json.length === 0) {
-                alert('No Saved Codes!');
+                alert('No Shared Codes!');
             }
             else {
                 if (json.length !== $('#shareTable tbody tr').length-1){
                     json.forEach(code => {
                     let slug = String(code.uniqueShareUrl);
                     $('#shared-code').show();
-                    $('#shareTable tr:last').after(`<tr><td> ${String(code.code).trunc(50)} </td> <td> ${code.language} </td> <td> ${String(code.permission)} </td> <td> <a href="javascript:deleteSavedCode('${slug}')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
+                    $('#shareTable tr:last').after(`<tr><td> <a href="${location.origin + '/' + slug}" target="_blank"> ${String(code.code).trunc(50)} </a> </td> <td> ${code.language} </td> <td> ${String(code.permission)} </td> <td> <a href="javascript:deleteSavedSharedCode('${slug}', 'deleteSharedCode')"> <i class="fa fa-trash-o" style="font-size: larger"></i> </a> </td> </tr>`);
                     });
                 }
             }

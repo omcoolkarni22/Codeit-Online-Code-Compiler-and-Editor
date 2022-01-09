@@ -190,6 +190,22 @@ def deleteSavedCode(request):
             })
 
 
+# delete saved code
+@csrf_exempt
+def deleteSharedCode(request):
+    if request.is_ajax() and request.method == 'POST':
+        unique_url = request.POST['unique_url']
+        try:
+            ShareCode.objects.get(uniqueShareUrl=unique_url).delete()
+            return JsonResponse({
+                "success": True
+            })
+        except Exception as e:
+            return JsonResponse({
+                "success": False
+            })
+
+
 # Return all shared codes
 @csrf_exempt
 def AllSharedCode(request):
